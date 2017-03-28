@@ -23,14 +23,23 @@ $file = fopen('subject-data.csv', 'r');
 $key  = fgetcsv($file,",");
 
 $json = array();
+$subArray= array();
 
 //bind each relevant keyName to it's corresponding value
 while ($row = fgetcsv($file, ",")) {
-  //only shows data related to id
+  //only shows data related to Subjectid
   if ($row[0] === $id){
-        $json[] = array_combine($key, $row);
+    // pushes the 2nd and 3rd items of the array
+    //with named keys to $subArray
+        $preJson[$key[1]] = $row[1];
+        $preJson[$key[2]] = $row[2];
+        array_push($subArray, $preJson);
       }
     }
+    //sets first key as the request id
+    $json[$key[0]] = $id;
+    //sets content key to
+    $json[content] = $subArray;
 
 //encodes the array into JSON format
 $json = json_encode($json);
