@@ -14,19 +14,20 @@ $app = new \Slim\App;
 $app->get('/student-data/{id}', function (Request $request, Response $response) {
   $id = $request->getAttribute('id');
 
-//getting the csv data
+  //getting the csv data
 
-//opening the csv file in read-only
-$file = fopen('subject-data.csv', 'r');
+  //opening the csv file in read-only
+  $file = fopen('subject-data.csv', 'r');
 
-//getting the headers to be used as keys
-$key  = fgetcsv($file,",");
+  //getting the headers to be used as keys
+  $key  = fgetcsv($file,",");
 
-$json = array();
-$subArray= array();
+  //setting the arrays for the loop
+  $json = array();
+  $subArray= array();
 
-//bind each relevant keyName to it's corresponding value
-while ($row = fgetcsv($file, ",")) {
+  //bind each relevant keyName to it's corresponding value
+  while ($row = fgetcsv($file, ",")) {
   //only shows data related to Subjectid
   if ($row[0] === $id){
     // pushes the 2nd and 3rd items of the array
@@ -38,15 +39,13 @@ while ($row = fgetcsv($file, ",")) {
     }
     //sets first key as the request id
     $json[$key[0]] = $id;
-    //sets content key to
+    //sets content key to be the subarray made in the while loop
     $json[content] = $subArray;
 
-//encodes the array into JSON format
-$json = json_encode($json);
-
-//prints the JSON
-print_r($json);
-  $response->getBody()->write('');
-  return $response;
+    //encodes the array into JSON format
+    $json = json_encode($json);
+    //prints the JSON
+    $response->withJson($json);
 });
+
 $app->run();
