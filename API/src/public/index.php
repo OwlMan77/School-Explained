@@ -1,7 +1,7 @@
 
 <?php
 
-//using request and reponse class to make it easier to write
+//using request and response class to make it easier to write
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -45,7 +45,8 @@ $app->get('/student-data/{id}', function (Request $request, Response $response) 
     //encodes the array into JSON format
     $json = json_encode($json);
     //prints the JSON
-    $response->withJson($json);
+  $newResponse = $response->withJson($json);
+  return $newResponse;
 });
 
 $app->run();
