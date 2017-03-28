@@ -14,19 +14,22 @@ $app = new \Slim\App;
 $app->get('/student-data/{id}', function (Request $request, Response $response) {
   $id = $request->getAttribute('id');
 
------//getting the csv data----------
+//getting the csv data
 
 //opening the csv file in read-only
 $file = fopen('subject-data.csv', 'r');
 
 //getting the headers to be used as keys
-$keyName  = fgetcsv($file,",");
+$key  = fgetcsv($file,",");
 
 $json = array();
 
-//bind each relevant keyName to a it's corresponding value
+//bind each relevant keyName to it's corresponding value
 while ($row = fgetcsv($file, ",")) {
-        $json[] = array_combine($keyName, $row);
+  //only shows data related to id
+  if ($row[0] === $id){
+        $json[] = array_combine($key, $row);
+      }
     }
 
 //encodes the array into JSON format
