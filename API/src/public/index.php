@@ -13,5 +13,9 @@ $app = new \Slim\App;
 //adding a route fot student-data
 $app->get('/student-data/{id}', function (Request $request, Response $response) {
 
+  $id = $request->getAttribute('id');
+  $response->getBody()->write("{ subjectId:$id}");
+
+  return $response;
 });
 $app->run();
