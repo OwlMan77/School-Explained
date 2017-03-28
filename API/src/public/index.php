@@ -1,5 +1,6 @@
 
 <?php
+//what's left to do is override Slim's ErrorHandler to give back status codes 
 
 //using request and response class to make it easier to write
 use \Psr\Http\Message\ServerRequestInterface as Request;
