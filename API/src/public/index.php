@@ -1,14 +1,17 @@
+
 <?php
+
+//using request and reponse class to make it easier to write
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 
+//making the app
 $app = new \Slim\App;
-$app->get('/hello/{name}', function (Request $request, Response $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
 
-    return $response;
+//adding a route fot student-data
+$app->get('/student-data/{id}', function (Request $request, Response $response) {
+
 });
 $app->run();
