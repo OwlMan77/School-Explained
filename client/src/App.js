@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-//do an API call to back end
 
-// function fetchJson(url) {
-//     return fetch(url)
-//     .then(request => request.text())
-//     .then(text => {
-//       const resultString = JSON.parse(text);
-//       const resultObject = JSON.parse(resultString);
-//     console.log(resultObject['content']);
-//     })
-//     .catch(error => {
-//         console.log(`ERROR: ${error.stack}`);
-//     });
-// }
 
 const API = `http://localhost:8080/student-data`
 //creates react Component
@@ -35,6 +22,7 @@ class dropdown extends Component {
     this.setState({subject: event.target.value});
   }
 
+//do an API call to back end
   fetchJson(url) {
       return fetch(url)
       .then(request => request.text())
@@ -61,11 +49,11 @@ class dropdown extends Component {
       </div>
     );
   }
-componentDidUpdate(){
+componentDidUpdate(prevState){
   const subjectsPicker = document.getElementById('subjectsPicker');
   console.log(subjectsPicker);
-if(subjectsPicker.value !== this.state.subject){
-this.fetchJson(`${API}/${this.state.subject}`);}
+  if(prevState.subject !== this.state.subject){
+    this.fetchJson(`${API}/${this.state.subject}`);}
 }
 }
 
