@@ -1,6 +1,7 @@
 
 <?php
-//what's left to do is override Slim's ErrorHandler to give back status codes 
+//what's left to do is override Slim's ErrorHandler to give back status codes
+
 
 //using request and response class to make it easier to write
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -11,6 +12,15 @@ require '../vendor/autoload.php';
 //making the app
 $app = new \Slim\App;
 
+//add CORS
+$app->add(new \Tuupola\Middleware\Cors([
+    "origin" => ["*"],
+    "methods" => ["GET"],
+    "headers.allow" => ["Accept", "Content-Type"],
+    "headers.expose" => [],
+    "credentials" => false,
+    "cache" => 0,
+]));
 //adding a route for student-data
 $app->get('/student-data/{id}', function (Request $request, Response $response) {
   $id = $request->getAttribute('id');
@@ -46,7 +56,13 @@ $app->get('/student-data/{id}', function (Request $request, Response $response) 
     //encodes the array into JSON format
     $json = json_encode($json);
     //prints the JSON
-  $newResponse = $response->withJson($json);
+
+    if(empty($id)){
+    $newResponse = $response->withStatus(404);
+    }
+    else{
+      $newResponse = $response->withJson($json);
+    }
   return $newResponse;
 });
 
