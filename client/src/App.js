@@ -78,11 +78,20 @@ class dropdown extends Component {
   }
 
 //will only make the api call when the form changes
-  componentDidUpdate(){
-  if(this.state.haltTheLoop === 'no'){
+    componentDidUpdate(){
+    if(this.state.haltTheLoop === 'no'){
     this.fetchJson(`${API}/${this.state.subject}`);
     this.setState({haltTheLoop: 'yes'})
   }
+      }
+}
+
+export class romanNumerals extends Component {
+//create a form field, a button and a output
+//create a function that will convert number into roman numerals
+//display answer 
+  render(){
+    return
   }
 }
 
