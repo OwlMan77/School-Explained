@@ -41,7 +41,7 @@ class dropdown extends Component {
           console.log(`ERROR: ${error.stack}`);
       });
     }
-//creates input dropdown for subjects
+    //creates input dropdown for subjects
     render() {
     const stater         = this.state;
 
@@ -77,7 +77,7 @@ class dropdown extends Component {
     );
   }
 
-//will only make the api call when the form changes
+    //will only make the api call when the form changes
     componentDidUpdate(){
     if(this.state.haltTheLoop === 'no'){
     this.fetchJson(`${API}/${this.state.subject}`);
@@ -86,13 +86,6 @@ class dropdown extends Component {
       }
 }
 
-export class romanNumerals extends Component {
-//create a form field, a button and a output
-//create a function that will convert number into roman numerals
-//display answer 
-  render(){
-    return
-  }
-}
+
 
 export default dropdown;
