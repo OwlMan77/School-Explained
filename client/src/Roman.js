@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 
   function romanize (num) {
       if (!+num)
+      //if not a number return false
           return false;
       else if (num < 100 && num > 0) {
+        //turn the number into a string
         var digits = String(+num).split(""),
             key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
                    "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
@@ -17,6 +19,7 @@ import React, { Component } from 'react';
         return Array(+digits.join("") + 1).join("M") + roman;
       }
       else{
+        //will return this if the nujmber is not within range
       return "Please choose a number between 1-99";
       }
 

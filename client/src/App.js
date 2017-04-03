@@ -48,6 +48,7 @@ class dropdown extends Component {
     //if 0 it should tell user to choose a subject if they have then the content is rendered
     let listItems = null;
     if(stater.subject === "0"){
+      return
       listItems = <li id='choose'>
       <p>Please choose A Subject</p>
       </li>
